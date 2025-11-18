@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Название:{{task.title}}</h1>
+<p>Описание:{{task.description}}</p>
+<p>Приоритет:{{task.priority}}</p>
+<p>Статус:{{task.status}}</p>
+<p>Создатель:{{task.creator}}</p>
+<div class="mt-3">
+    <a href='{% url "tasks:task_create"%}'>Изменить</a>
+    <a href='{% url "tasks:task_delete" task.pk%}'>Удалить</a>
+    <a href='{% url "tasks:task_list"%}'>Назад</a>
+</div>
+{% endblock %}
