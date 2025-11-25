@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <title>Галерея</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Галерея та Відео</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="info.html">Інформація</a></li>
+            <li><a href="gallery.html">Галерея</a></li>
+            <li><a href="#">Контакти</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2 style="color: #2c3e50; margin-top:20px;">Спосіб 1: Список (List)</h2>
+        <div class="img-container">
+            <ul>
+                <li><img src="images/1.jpg" alt="Photo 1"></li>
+                <li><img src="images/1.jpg" alt="Photo 2"></li>
+                <li><img src="images/1.jpg" alt="Photo 3"></li>
+            </ul>
+        </div>
+
+        <h2 style="color: #2c3e50; clear:both;">Спосіб 2: Блоки (Div) з анімацією</h2>
+        <div style="text-align: center;">
+            <div class="inline-img">
+                <img src="images/1.jpg" alt="Photo 4">
+            </div>
+            <div class="inline-img">
+                <img src="images/1.jpg" alt="Photo 5">
+            </div>
+            <div class="inline-img">
+                <img src="images/1.jpg" alt="Photo 6">
+            </div>
+            <div class="inline-img">
+                <img src="images/1.jpg" alt="Photo 7">
+            </div>
+        </div>
+
+        <h2 style="color: #2c3e50; clear:both;">Відеофрагменти</h2>
+        <div class="multimedia">
+            <div class="multimedia-video">
+                <video controls>
+                    <source src="video/movie.mp4" type="video/mp4">
+                    Ваш браузер не підтримує відео.
+                </video>
+            </div>
+            <div class="multimedia-video">
+                <video controls>
+                    <source src="video/movie.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="multimedia-video">
+                <video controls>
+                    <source src="video/movie.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright 2025</p>
+    </footer>
+
+</body>
+</html>

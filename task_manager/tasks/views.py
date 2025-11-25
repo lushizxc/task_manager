@@ -11,6 +11,24 @@ class TaskListView(ListView):
     context_object_name = 'tasks'
     template_name = 'task_list.html'
 
+    PRIORITY_FILTER_MAP = {
+        'high': ['high', 'mid', 'low'],
+        'mid': ['mid', 'low'],
+        'low': ['low'],
+    }
+
+    def get_queryset(self):
+        queryset = Task.objects.all().exclude(status='done')
+        priority_filter = self.request.GET.get('priority_filter')
+
+        if priority_filter:
+            priorities_to_show = self.PRIORITY_FILTER_MAP.get(priority_filter)
+
+            if priorities_to_show:
+                queryset = queryset.filter(priority__in=priorities_to_show)
+
+        return queryset
+
 class TaskDetailView(DetailView):
     model = Task
     context_object_name = 'task'
