@@ -18,12 +18,28 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    {% if user.is_authenticated%}
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'tasks:task_list' %}">Список задач</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'tasks:task_create' %}">Добавить задачу</a>
                     </li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'tasks:logout' %}" class="d-inline">
+                            {%csrf_token%}
+                            <button type="submit" class="nav-link bg-transparent border-0">Выход {{user.username}}</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tasks:register' %}">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tasks:login' %}">Вход</a>
+                    </li>
+                    {% endif%}
                 </ul>
             </div>
         </div>

@@ -5,9 +5,58 @@
 <p>Приоритет:{{task.priority}}</p>
 <p>Статус:{{task.status}}</p>
 <p>Создатель:{{task.creator}}</p>
-<div class="mt-3">
-    <a href='{% url "tasks:task_create"%}'>Изменить</a>
-    <a href='{% url "tasks:task_delete" task.pk%}'>Удалить</a>
-    <a href='{% url "tasks:task_list"%}'>Назад</a>
-</div>
+    <a href='{% url "tasks:task_update" task.pk %}' class="fw-bold">Изменить</a>
+    <a href='{% url "tasks:task_delete" task.pk%}' class="fw-bold">Удалить</a>
+    <a href='{% url "tasks:task_list"%}' class="fw-bold">Назад</a>
+    <h2>Комментарии</h2>
+    <ul>
+    {% for comment in task.comments.all %}
+      <li class="list-group-item">
+    <div class="d-flex justify-content-between">
+
+        {% if edit_comment_id == comment.pk %}
+
+            <div class="w-100">
+                <strong>Редактирование комментария:</strong>
+                <form action="{% url 'tasks:edit_comment' comment.pk %}" method="post" class="mt-2">
+                    {% csrf_token %}
+                    <textarea name="text" class="form-control mb-2" rows="3">{{ comment.text }}</textarea>
+
+                    <button type="submit" class="btn btn-success btn-sm">Сохранить</button>
+                    <a href="{% url 'tasks:task_detail' task.pk %}" class="btn btn-secondary btn-sm">Отмена</a>
+                </form>
+            </div>
+
+        {% else %}
+
+            <div>
+                <strong>{{ comment.author }}</strong>
+                <small class="text-muted">({{ comment.create_at|date:'d M Y H:i' }})</small>
+                <p class="mb-0">{{ comment.text }}</p>
+            </div>
+
+            {% if request.user == comment.author %}
+                <div>
+                    <a href="?edit_comment={{ comment.pk }}" class="text-primary text-decoration-none me-3">
+                        Изменить
+                    </a>
+
+                    <a href="{% url 'tasks:comment_delete' comment.pk %}" class="text-danger text-decoration-none">
+                        Удалить
+                    </a>
+                </div>
+            {% endif %}
+
+        {% endif %}
+    {% endfor %}
+    </div>
+</li>
+        </ul> <hr> <h3>Добавить комментарий</h3>
+    <form action="{% url 'tasks:comment_created' task.pk %}" method="post" class="mb-4" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <textarea name="text" class="form-control" rows="3" placeholder="Напишите ваш комментарий..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
 {% endblock %}

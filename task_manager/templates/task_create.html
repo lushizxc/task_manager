@@ -1,11 +1,10 @@
 {% extends 'base.html'%}
 
 {% block content %}
-<h1>Добавить новую задачу</h1>
-
+<h1>{{ page_title|default:"Задача" }}</h1>
 <form method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit">Сохранить</button>
+<button type="submit" class="btn btn-primary">{{ button_text|default:"Сохранить" }}</button>
 </form>
 {% endblock %}
